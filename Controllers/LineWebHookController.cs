@@ -7,7 +7,12 @@ namespace isRock.Template
 {
     public class LineWebHookController : LineBot.LineWebHookControllerBase
     {
-        private readonly string jsonFile = @"C:\Data\data.json";
+        private IWebHostEnvironment _hostEnvironment;
+
+        public LineWebHookController(IWebHostEnvironment hostEnvironment)
+        {
+            _hostEnvironment = hostEnvironment;
+        }
 
         [Route("api/LineBotWebHook")]
         [HttpPost]
@@ -16,13 +21,14 @@ namespace isRock.Template
             //"抓取LineUserID";
             var AdminUserId = ReceivedMessage.events[0].source.userId;
             // 資料來源
-            Iching64 iching = JsonConvert.DeserializeObject<Iching64>(System.IO.File.ReadAllText(jsonFile));
+            string dataPath = $"{_hostEnvironment.ContentRootPath}\\Datas\\data.json";
+            Iching64 iching = JsonConvert.DeserializeObject<Iching64>(System.IO.File.ReadAllText(dataPath));
 
             try
             {
                 //設定ChannelAccessToken(從LineDeveloper網頁上獲取)
                 //ChannelAccessToken = "Token";
-                
+                ChannelAccessToken = "Y0A4L90tULB+Cbk7J5azRYkz0mS7en0mvnktEhoVRa7hAC/doD83MoBCWJhTeKsdIxBVn1PKx5SjB/WdMAGLkDNwY7qyiZmrOGF90bEH5Zgdtm8I/cSOGdJSi1+/wdxEgfltKs9E+uRzqKgU3LO7uwdB04t89/1O/w1cDnyilFU=";
                 //配合Line Verify
                 if (ReceivedMessage.events == null || ReceivedMessage.events.Count <= 0 || ReceivedMessage.events.FirstOrDefault().replyToken == "00000000000000000000000000000000")
                 {
