@@ -27,8 +27,8 @@ namespace isRock.Template
             try
             {
                 //設定ChannelAccessToken(從LineDeveloper網頁上獲取)
-                //ChannelAccessToken = "Token";
-                ChannelAccessToken = "Y0A4L90tULB+Cbk7J5azRYkz0mS7en0mvnktEhoVRa7hAC/doD83MoBCWJhTeKsdIxBVn1PKx5SjB/WdMAGLkDNwY7qyiZmrOGF90bEH5Zgdtm8I/cSOGdJSi1+/wdxEgfltKs9E+uRzqKgU3LO7uwdB04t89/1O/w1cDnyilFU=";
+                ChannelAccessToken = "Token";
+                
                 //配合Line Verify
                 if (ReceivedMessage.events == null || ReceivedMessage.events.Count <= 0 || ReceivedMessage.events.FirstOrDefault().replyToken == "00000000000000000000000000000000")
                 {
